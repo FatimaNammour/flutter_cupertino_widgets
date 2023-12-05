@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_widgets/core/widgets/app_theme.dart';
 import 'package:flutter_cupertino_widgets/pages/page_one.dart';
 import 'package:flutter_cupertino_widgets/pages/page_others.dart';
+import 'package:flutter_cupertino_widgets/pages/page_segmented.dart';
 import 'package:flutter_cupertino_widgets/pages/pob_ub_page.dart';
 
 void main() {
@@ -31,6 +32,8 @@ class MyApp extends StatelessWidget {
                   icon: Icon(CupertinoIcons.person), label: "Profile"),
               BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.chat_bubble), label: "Chat"),
+              BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.settings), label: "Settings"),
             ]),
         tabBuilder: (BuildContext context, int index) {
           switch (index) {
@@ -50,10 +53,19 @@ class MyApp extends StatelessWidget {
               });
 
             case 2:
-            default:
               return CupertinoTabView(
                 builder: (context) {
                   return const PageCupertino(
+                      // title: "Page Three",
+                      // indexOfPage: index,
+                      );
+                },
+              );
+            case 3:
+            default:
+              return CupertinoTabView(
+                builder: (context) {
+                  return const SegmentedControl(
                       // title: "Page Three",
                       // indexOfPage: index,
                       );
