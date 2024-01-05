@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_widgets/core/widgets/urls.dart';
 
 class PobUbPage extends StatefulWidget {
@@ -9,6 +10,9 @@ class PobUbPage extends StatefulWidget {
 }
 
 class _PobUbPageState extends State<PobUbPage> {
+  bool showTextField = false;
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -20,10 +24,42 @@ class _PobUbPageState extends State<PobUbPage> {
       child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
-            const CupertinoSliverNavigationBar(
-              largeTitle: Text("Pictures"),
-              leading: Icon(CupertinoIcons.heart),
-              trailing: Icon(CupertinoIcons.search),
+            CupertinoSliverNavigationBar(
+              largeTitle: const Text("Pictures"),
+              leading: showTextField ? null : const Icon(CupertinoIcons.heart),
+              trailing: showTextField
+                  ? CupertinoSearchTextField(
+                      suffixMode: OverlayVisibilityMode.always,
+                      autocorrect: true,
+                      autofocus: true,
+                      suffixIcon: const Icon(
+                        CupertinoIcons.clear_circled,
+                        size: 20,
+                      ),
+                      onSuffixTap: () {
+                        if (searchController.text.isEmpty) {
+                          setState(() {
+                            showTextField = false;
+                          });
+                        } else {
+                          setState(() {
+                            searchController.clear();
+                          });
+                        }
+                      },
+                      controller: searchController,
+                    )
+                  : CupertinoButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
+                        setState(() {
+                          showTextField = true;
+                        });
+                      },
+                      child: const Icon(
+                        CupertinoIcons.search,
+                        size: 35,
+                      )),
               // padding: EdgeInsetsDirectional.zero,
             ),
           ];
@@ -72,7 +108,18 @@ class _PobUbPageState extends State<PobUbPage> {
   Widget buildItem(String imageUrl) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(30), // Image border
-      child: Image.network(imageUrl, fit: BoxFit.cover),
+      child: Image.network(
+        imageUrl,
+        fit: BoxFit.cover,
+        loadingBuilder: (context, child, loadingProgress) =>
+            loadingProgress != null
+                ? const CupertinoActivityIndicator(
+                    animating: true,
+                    color: CupertinoColors.activeGreen,
+                  )
+                : child,
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) => child,
+      ),
     );
   }
 }

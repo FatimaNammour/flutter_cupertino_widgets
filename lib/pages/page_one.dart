@@ -13,7 +13,6 @@ class _PageTabState extends State<PageTab> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      // backgroundColor: CupertinoColors.white,
       navigationBar: CupertinoNavigationBar(
         middle: Text(widget.title,
             style: const TextStyle(
@@ -23,17 +22,14 @@ class _PageTabState extends State<PageTab> {
             padding: EdgeInsets.zero,
             onPressed: () {},
             child: const Text("trailing button")),
-        // backgroundColor: CupertinoColors.white
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(widget.title,
-                style: const TextStyle(
-                    // color: CupertinoColors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold)),
+                style:
+                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
             const SizedBox(
               height: 20,
             ),

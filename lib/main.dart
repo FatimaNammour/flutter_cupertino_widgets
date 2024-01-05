@@ -18,22 +18,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoApp(
       theme: appTheme,
-      // color: CupertinoColors.activeGreen,
       debugShowCheckedModeBanner: false,
       home: CupertinoTabScaffold(
-        // backgroundColor: CupertinoColors.white,
         tabBar: CupertinoTabBar(
-            // backgroundColor: CupertinoColors.white,
             activeColor: CupertinoColors.activeGreen,
             items: const [
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.home), label: "home"),
+                  icon: Icon(CupertinoIcons.home), label: "A"),
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.person), label: "Profile"),
+                  icon: Icon(CupertinoIcons.person), label: "B"),
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.chat_bubble), label: "Chat"),
+                  icon: Icon(CupertinoIcons.chat_bubble), label: "C"),
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.settings), label: "Settings"),
+                  icon: Icon(CupertinoIcons.settings), label: "D"),
             ]),
         tabBuilder: (BuildContext context, int index) {
           switch (index) {
@@ -46,29 +43,20 @@ class MyApp extends StatelessWidget {
               );
             case 1:
               return CupertinoTabView(builder: (context) {
-                return const PobUbPage(
-                    // title: "Page Tow",
-                    // indexOfPage: index,
-                    );
+                return const PobUbPage();
               });
 
             case 2:
               return CupertinoTabView(
                 builder: (context) {
-                  return const PageCupertino(
-                      // title: "Page Three",
-                      // indexOfPage: index,
-                      );
+                  return const PageCupertino();
                 },
               );
             case 3:
             default:
               return CupertinoTabView(
                 builder: (context) {
-                  return const SegmentedControl(
-                      // title: "Page Three",
-                      // indexOfPage: index,
-                      );
+                  return const SegmentedControl();
                 },
               );
           }
